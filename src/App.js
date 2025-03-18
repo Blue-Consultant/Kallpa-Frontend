@@ -1,38 +1,18 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useEffect } from "react";
-
-// react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-
-// @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-
-// Material Kit 2 React themes
 import theme from "assets/theme";
 import Presentation from "layouts/pages/presentation";
-
-// Material Kit 2 React routes
+import SignInBasic from "pages/LandingPages/SignIn/index";
 import routes from "routes";
+import PropTypes from "prop-types";
+import useAuth from "pages/LandingPages/SignIn/hooks/useAuth";
 
 export default function App() {
   const { pathname } = useLocation();
+  const { token } = useAuth();
 
-  // Setting page scroll to 0 when changing the route
   useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -45,9 +25,21 @@ export default function App() {
       }
 
       if (route.route) {
-        return <Route exact path={route.route} element={route.component} key={route.key} />;
+        return (
+          <Route
+            exact
+            path={route.route}
+            element={
+              route.protected ? (
+                <PrivateRoute isAuthenticated={!!token}>{route.component}</PrivateRoute>
+              ) : (
+                route.component
+              )
+            }
+            key={route.key}
+          />
+        );
       }
-
       return null;
     });
 
@@ -56,9 +48,31 @@ export default function App() {
       <CssBaseline />
       <Routes>
         {getRoutes(routes)}
-        <Route path="/presentation" element={<Presentation />} />
-        <Route path="*" element={<Navigate to="/presentation" />} />
+        <Route path="/authentication/sign-in/basic" element={<SignInBasic />} />
+        <Route
+          path="/presentation"
+          element={
+            <PrivateRoute isAuthenticated={!!localStorage.getItem("authToken")}>
+              <Presentation />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/authentication/sign-in/basic" />} />
       </Routes>
     </ThemeProvider>
   );
 }
+
+function PrivateRoute({ children, isAuthenticated }) {
+  const location = useLocation();
+  return isAuthenticated ? (
+    children
+  ) : (
+    <Navigate to="/authentication/sign-in/basic" state={{ from: location }} />
+  );
+}
+
+PrivateRoute.propTypes = {
+  children: PropTypes.node.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+};

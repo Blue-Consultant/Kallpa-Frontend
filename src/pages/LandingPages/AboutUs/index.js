@@ -27,11 +27,12 @@ import MKButton from "components/MKButton";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 
-// About Us page sections
+// About Us page componentes
 import Information from "pages/LandingPages/AboutUs/sections/Information";
 import Team from "pages/LandingPages/AboutUs/sections/Team";
 import Featuring from "pages/LandingPages/AboutUs/sections/Featuring";
 import Newsletter from "pages/LandingPages/AboutUs/sections/Newsletter";
+import Plans from "pages/LandingPages/AboutUs/sections/Plans";
 
 // Routes
 import routes from "routes";
@@ -127,6 +128,7 @@ function AboutUs() {
           boxShadow: ({ boxShadows: { xxl } }) => xxl,
         }}
       >
+        <Plans />
         <Information />
         <Team />
         <Featuring />

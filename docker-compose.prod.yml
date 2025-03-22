@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  kallpa-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      args:
+        NODE_VERSION: 18-alpine
+        NGINX_VERSION: stable-alpine
+    ports:
+      - "80:80"
+    environment:
+      - APP_DIR=/usr/share/nginx/html
+      - CONFIG_DIR=/etc/nginx
+    volumes:
+      - ./logs/nginx:/var/log/nginx
+    restart: always

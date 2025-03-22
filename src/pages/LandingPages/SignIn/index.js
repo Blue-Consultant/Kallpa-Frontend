@@ -17,6 +17,7 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
+import MKAlert from "components/MKAlert";
 
 // Material Kit 2 React example components
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
@@ -164,7 +165,7 @@ function SignInBasic() {
                   </MKBox>
                   {error && (
                     <MKTypography variant="caption" color="error" sx={{ mt: 2 }}>
-                      {error}
+                      <MKAlert color="error">{error}</MKAlert>
                     </MKTypography>
                   )}
                   <MKBox mt={4} mb={1}>

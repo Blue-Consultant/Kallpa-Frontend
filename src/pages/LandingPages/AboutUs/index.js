@@ -28,10 +28,10 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 
 // About Us page componentes
-import Information from "pages/LandingPages/AboutUs/sections/Information";
-import Team from "pages/LandingPages/AboutUs/sections/Team";
-import Featuring from "pages/LandingPages/AboutUs/sections/Featuring";
-import Newsletter from "pages/LandingPages/AboutUs/sections/Newsletter";
+// import Information from "pages/LandingPages/AboutUs/sections/Information";
+// import Team from "pages/LandingPages/AboutUs/sections/Team";
+// import Featuring from "pages/LandingPages/AboutUs/sections/Featuring";
+// import Newsletter from "pages/LandingPages/AboutUs/sections/Newsletter";
 import Plans from "pages/LandingPages/AboutUs/sections/Plans";
 
 // Routes
@@ -129,10 +129,10 @@ function AboutUs() {
         }}
       >
         <Plans />
-        <Information />
-        <Team />
-        <Featuring />
-        <Newsletter />
+        {/* <Information /> */}
+        {/* <Team /> */}
+        {/* <Featuring /> */}
+        {/* <Newsletter /> */}
       </Card>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />

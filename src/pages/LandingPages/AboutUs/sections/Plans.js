@@ -5,57 +5,33 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import usePlans from "../hooks/usePlans";
+import PlanModal from "./PlanModal";
+// import MKButton from "components/MKButton";
 
 function Plans() {
-  const plans = [
-    {
-      title: "Básico",
-      price: "PEN 0 por 1 mes",
-      afterPrice: "Después, PEN 19.90 por mes",
-      features: [
-        "👾 Todo lo del Plan Gratuito.",
-        "👾 Anuncio destacado en la lista principal (con distintivo).",
-        "👾 Publicación con hasta 5 imágenes.",
-        "👾 Prioridad media en los resultados de búsqueda.",
-      ],
-      buttonText: "Probar 1 mes por PEN 0",
-      buttonGeneral: "Un pago único",
-      buttonColor: "#ff80b5",
-      descipPlan:
-        "PEN 0 por 1 mes. Después, cuesta PEN 19.90 al mes. La oferta solo está disponible si aún no probaste Premium. Se aplican Términos.",
-    },
-    {
-      title: "Estandar",
-      price: "PEN 0 por 1 mes",
-      afterPrice: "Después, PEN 39.90 por mes",
-      features: [
-        "👾 Todo lo del Plan Básico.",
-        "👾 Mayor prioridad en los resultados de búsqueda.",
-        "👾 Publicación con hasta 10 imágenes y video.",
-        "👾 Estadísticas básicas sobre visitas al anuncio.",
-      ],
-      buttonText: "Probar 1 mes por PEN 0",
-      buttonGeneral: "Un pago único",
-      buttonColor: "#ff80b5",
-      descipPlan:
-        "PEN 0 por 1 mes. Después, cuesta PEN 39.90 al mes. La oferta solo está disponible si aún no probaste Premium. Se aplican Términos.",
-    },
-    {
-      title: "Premium",
-      price: "PEN 79.9 al 1 mes",
-      features: [
-        "👾 Máxima prioridad en resultados de búsqueda.",
-        "👾 Publicación con hasta 20 imágenes y videos.",
-        "👾 Estadísticas avanzadas y análisis de rendimiento.",
-        "👾 Notificaciones personalizadas para compradores interesados.",
-        "👾 Anuncio fijado en la sección de destacados.",
-      ],
-      buttonText: "Obten Premium",
-      buttonGeneral: "Un pago único",
-      buttonColor: "#ffb74d",
-      descipPlan: "El mejor Plan de Kallpa. Se aplican Términos",
-    },
-  ];
+  const {
+    plans,
+    loading,
+    error,
+    openModal,
+    modalOptions,
+    handleOpenModal,
+    handleCloseModal,
+    selectedPlanName,
+  } = usePlans(); // Usa el hook para obtener los planes
+
+  if (loading) {
+    return (
+      <Typography variant="h6" color="textSecondary">
+        Loading plans...
+      </Typography>
+    ); // Muestra un mensaje mientras carga
+  }
+
+  if (error) {
+    return <Typography variant="h6" color="error">{`Error: ${error}`}</Typography>; // Muestra un mensaje de error
+  }
 
   return (
     <Box component="section" py={6} sx={{ backgroundColor: "white", color: "#fff" }}>
@@ -90,6 +66,8 @@ function Plans() {
                       {plan.afterPrice}
                     </Typography>
                   )}
+                  {/* Línea horizontal después de afterPrice */}
+                  <Box sx={{ borderBottom: "1px solid rgb(117, 111, 111)", mb: 2 }} />
                   <Box
                     component="ul"
                     sx={{
@@ -121,7 +99,7 @@ function Plans() {
                       color: "#000",
                       fontWeight: "bold",
                       borderRadius: "20px",
-                      width: "100%", // 🔹 Botón alineado al 100% del ancho
+                      width: "100%",
                     }}
                   >
                     {plan.buttonText}
@@ -135,24 +113,30 @@ function Plans() {
                       fontWeight: "bold",
                       borderRadius: "20px",
                       border: "2px solid white",
-                      width: "100%", // 🔹 Botón alineado al 100% del ancho
-                      "&:hover": {
-                        backgroundColor: "rgba(255, 255, 255, 0.2)", // Ligero fondo blanco al pasar el cursor
-                      },
+                      width: "100%",
                     }}
+                    onClick={() => handleOpenModal(plan.options, plan.title)}
                   >
                     {plan.buttonGeneral}
                   </Button>
                   {plan.descipPlan && (
-                    <Typography variant="body2" sx={{ color: "#bdbdbd", mt: 2 }}>
-                      {plan.descipPlan}
-                    </Typography>
+                    <>
+                      <Typography variant="body2" sx={{ color: "#bdbdbd", mt: 2 }}>
+                        {plan.descipPlan} Se aplican terminos y condiciones.
+                      </Typography>
+                    </>
                   )}
                 </Box>
               </Card>
             </Grid>
           ))}
         </Grid>
+        <PlanModal
+          open={openModal}
+          onClose={handleCloseModal}
+          options={modalOptions}
+          planName={selectedPlanName}
+        />
       </Container>
     </Box>
   );

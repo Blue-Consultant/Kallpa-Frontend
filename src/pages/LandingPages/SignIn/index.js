@@ -5,12 +5,6 @@ import { useNavigate, Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
-import MuiLink from "@mui/material/Link";
-
-// @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import GoogleIcon from "@mui/icons-material/Google";
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
@@ -26,8 +20,9 @@ import SimpleFooter from "examples/Footers/SimpleFooter";
 // Material Kit 2 React page layout routes
 import routes from "routes";
 
-// Imagen de fondo
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+// Imagen de fondo y logo
+// import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import logo from "assets/images/logo-kallpa.png";
 
 // Importa el controlador de login
 import { signInController } from "./controllers/signIn.controller";
@@ -56,14 +51,6 @@ function SignInBasic() {
     }
   };
 
-  // para desloguearse
-  // const { logout } = useAuth();
-
-  // const handleLogout = () => {
-  //   logout();
-  //   navigate("/authentication/sign-in/basic");
-  // };
-
   return (
     <>
       <DefaultNavbar
@@ -85,97 +72,150 @@ function SignInBasic() {
         width="100%"
         minHeight="100vh"
         sx={{
-          backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
-            `${linearGradient(
-              rgba(gradients.dark.main, 0.6),
-              rgba(gradients.dark.state, 0.6)
-            )}, url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
+          backgroundColor: "#1a1a1a",
         }}
       />
       <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
         <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%">
+          {/* Left Section: Logo and Greeting */}
           <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
-            <Card>
+            <Card
+              sx={{
+                backgroundColor: "#1616A0",
+                borderRadius: "16px",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+                height: "500px", // Increased height (previously 100%)
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <MKBox
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-                mx={2}
-                mt={-3}
-                p={2}
-                mb={1}
-                textAlign="center"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                mb={2}
+                width="40%" // Reduced logo size (previously 50%)
               >
-                <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-                  Sign in
-                </MKTypography>
-                <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
-                  <Grid item xs={2}>
-                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
-                      <FacebookIcon color="inherit" />
-                    </MKTypography>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
-                      <GitHubIcon color="inherit" />
-                    </MKTypography>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
-                      <GoogleIcon color="inherit" />
-                    </MKTypography>
-                  </Grid>
-                </Grid>
+                <MKBox component="img" src={logo} alt="Logo" width="100%" sx={{ height: "auto" }} />
               </MKBox>
-              <MKBox pt={4} pb={3} px={3}>
+              <MKTypography
+                variant="h3"
+                color="white"
+                sx={{
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  fontSize: "2.5rem",
+                }}
+              >
+                Hola, <br /> Bienvenid@!
+              </MKTypography>
+            </Card>
+          </Grid>
+
+          {/* Right Section: Login Form */}
+          <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
+            <Card
+              sx={{
+                borderRadius: "16px",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+                height: "500px",
+              }}
+            >
+              <MKBox pt={4} pb={3} px={5}>
+                <MKBox display="flex" justifyContent="flex-start" alignItems="center" mb={2}>
+                  <MKTypography
+                    variant="body2"
+                    color="info"
+                    sx={{ cursor: "pointer", display: "flex", alignItems: "center" }}
+                  >
+                    <span style={{ marginRight: "8px" }}>←</span> Volver
+                  </MKTypography>
+                </MKBox>
                 <MKBox component="form" role="form" onSubmit={handleSubmit}>
-                  <MKBox mb={2}>
+                  <MKBox mb={2} width="80%" mx="auto">
                     <MKInput
                       type="email"
-                      label="Email"
-                      fullWidth
+                      label="Correo Electrónico"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      sx={{
+                        backgroundColor: "#e0e0e0",
+                        borderRadius: "8px",
+                        width: "100%",
+                      }}
                     />
                   </MKBox>
-                  <MKBox mb={2}>
+                  <MKBox mb={2} width="80%" mx="auto">
                     <MKInput
                       type="password"
-                      label="Password"
-                      fullWidth
+                      label="Contraseña"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      sx={{
+                        backgroundColor: "#e0e0e0",
+                        borderRadius: "8px",
+                        width: "100%",
+                      }}
                     />
                   </MKBox>
-                  <MKBox display="flex" alignItems="center" ml={-1}>
-                    <Switch checked={rememberMe} onChange={handleSetRememberMe} />
+                  <MKBox
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    mb={2}
+                    px={2}
+                  >
+                    <MKBox display="flex" alignItems="center">
+                      <Switch checked={rememberMe} onChange={handleSetRememberMe} />
+                      <MKTypography
+                        variant="button"
+                        fontWeight="regular"
+                        color="text"
+                        onClick={handleSetRememberMe}
+                        sx={{ cursor: "pointer", userSelect: "none" }}
+                      >
+                        Recuérdame
+                      </MKTypography>
+                    </MKBox>
                     <MKTypography
                       variant="button"
-                      fontWeight="regular"
-                      color="text"
-                      onClick={handleSetRememberMe}
-                      sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
+                      color="info"
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
                     >
-                      &nbsp;&nbsp;Remember me
+                      ¿Olvidaste tu contraseña?
                     </MKTypography>
                   </MKBox>
                   {error && (
-                    <MKTypography variant="caption" color="error" sx={{ mt: 2 }}>
+                    <MKTypography
+                      variant="caption"
+                      color="error"
+                      sx={{ mt: 2, textAlign: "center" }}
+                    >
                       <MKAlert color="error">{error}</MKAlert>
                     </MKTypography>
                   )}
-                  <MKBox mt={4} mb={1}>
-                    <MKButton variant="gradient" color="info" fullWidth type="submit">
-                      sign in
+                  <MKBox mt={4} mb={1} width="80%" mx="auto">
+                    <MKButton
+                      variant="gradient"
+                      color="info"
+                      type="submit"
+                      sx={{
+                        borderRadius: "8px",
+                        backgroundColor: "#1a3c6d",
+                        "&:hover": {
+                          backgroundColor: "#15325b",
+                        },
+                        width: "100%",
+                      }}
+                    >
+                      Iniciar Sesión
                     </MKButton>
                   </MKBox>
                   <MKBox mt={3} mb={1} textAlign="center">
                     <MKTypography variant="button" color="text">
-                      Don&apos;t have an account?{" "}
+                      ¿No tienes una cuenta?{" "}
                       <MKTypography
                         component={Link}
                         to="/authentication/sign-up/cover"
@@ -184,7 +224,7 @@ function SignInBasic() {
                         fontWeight="medium"
                         textGradient
                       >
-                        Sign up
+                        Regístrate aquí
                       </MKTypography>
                     </MKTypography>
                   </MKBox>

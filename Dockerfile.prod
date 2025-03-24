@@ -1,0 +1,50 @@
+# Definir variables para facilitar la configuración
+ARG NODE_VERSION=18-alpine
+ARG NGINX_VERSION=stable-alpine
+ARG APP_NAME=Kallpa
+
+# Stage 1: Construcción de la aplicación React
+FROM node:$NODE_VERSION AS builder
+
+# Establecer el directorio de trabajo
+WORKDIR /app
+
+# Copiar y instalar dependencias
+COPY package.json package-lock.json ./
+RUN npm install --silent
+
+# Copiar el resto del código fuente
+COPY . .
+
+# Construir la aplicación en modo producción
+RUN npm run build
+
+# Verificar que la compilación se realizó correctamente
+RUN ls -la /app/build
+
+# Stage 2: Servidor Nginx para servir la aplicación
+FROM nginx:$NGINX_VERSION AS base
+
+# Definir variables de entorno
+ENV APP_DIR=/usr/share/nginx/html
+ENV CONFIG_DIR=/etc/nginx
+
+# Copiar la aplicación desde la etapa de construcción
+COPY --from=builder /app/build $APP_DIR
+
+# Ajustar permisos
+RUN chmod -R 777 $APP_DIR
+
+# Copiar configuración personalizada de Nginx
+COPY .docker/nginx.conf $CONFIG_DIR/nginx.conf
+
+# Exponer el puerto 80 para el tráfico HTTP
+EXPOSE 80
+
+# Comando por defecto para iniciar Nginx
+CMD ["nginx", "-g", "daemon off;"]
+
+# Metadatos del contenedor
+LABEL maintainer="Kallpa Team"
+LABEL version="1.0.0"
+LABEL description="Este contenedor ejecuta la aplicación React Kallpa servida por Nginx."

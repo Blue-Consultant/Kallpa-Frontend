@@ -1,9 +1,6 @@
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-
+// import FacebookIcon from "@mui/icons-material/Facebook";
+// import InstagramIcon from "@mui/icons-material/Instagram";
 // Material Kit 2 React components
 import MKTypography from "components/MKTypography";
 
@@ -18,74 +15,81 @@ export default {
     image: logoCT,
     route: "/",
   },
-  socials: [
-    {
-      icon: <FacebookIcon />,
-      link: "https://www.facebook.com/CreativeTim/",
-    },
-    {
-      icon: <TwitterIcon />,
-      link: "https://twitter.com/creativetim",
-    },
-    {
-      icon: <GitHubIcon />,
-      link: "https://github.com/creativetimofficial",
-    },
-    {
-      icon: <YouTubeIcon />,
-      link: "https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w",
-    },
-  ],
   menus: [
     {
-      name: "company",
+      name: "Ubicación Geográfica",
       items: [
-        { name: "about us", href: "https://www.creative-tim.com/presentation" },
-        { name: "freebies", href: "https://www.creative-tim.com/templates/free" },
-        { name: "premium tools", href: "https://www.creative-tim.com/templates/premium" },
-        { name: "blog", href: "https://www.creative-tim.com/blog" },
+        { name: "Departamentos", href: "#" },
+        { name: "Provincias", href: "#" },
+        { name: "Distritos", href: "#" },
       ],
     },
     {
-      name: "resources",
+      name: "Conócenos",
       items: [
-        { name: "illustrations", href: "https://iradesign.io/" },
-        { name: "bits & snippets", href: "https://www.creative-tim.com/bits" },
-        { name: "affiliate program", href: "https://www.creative-tim.com/affiliates/new" },
+        { name: "Sobre KALLPA", href: "#" },
+        { name: "Contacto", href: "#" },
+        { name: "Preguntas Frecuentes", href: "#" },
       ],
     },
     {
-      name: "help & support",
+      name: "Para clientes",
       items: [
-        { name: "contact us", href: "https://www.creative-tim.com/contact-us" },
-        { name: "knowledge center", href: "https://www.creative-tim.com/knowledge-center" },
-        { name: "custom development", href: "https://services.creative-tim.com/" },
-        { name: "sponsorships", href: "https://www.creative-tim.com/sponsorships" },
-      ],
-    },
-    {
-      name: "legal",
-      items: [
-        { name: "terms & conditions", href: "https://www.creative-tim.com/terms" },
-        { name: "privacy policy", href: "https://www.creative-tim.com/privacy" },
-        { name: "licenses (EULA)", href: "https://www.creative-tim.com/license" },
+        { name: "Registrarse", href: "#" },
+        { name: "Iniciar Sesión", href: "#" },
+        { name: "Publicar Anunció", href: "#" }, // Fixed typo: "Anunció" to "Anuncio"
+        { name: "Contactar Soporte", href: "#" },
       ],
     },
   ],
   copyright: (
-    <MKTypography variant="button" fontWeight="regular">
-      All rights reserved. Copyright &copy; {date} Material Kit by{" "}
+    <MKTypography variant="button" fontWeight="regular" color="text.secondary">
+      © {date} Kallpa |{" "}
       <MKTypography
         component="a"
-        href="https://www.creative-tim.com"
+        href="#"
         target="_blank"
         rel="noreferrer"
         variant="button"
         fontWeight="regular"
+        color="text.secondary"
       >
-        Creative Tim
+        Términos y Condiciones
+      </MKTypography>{" "}
+      |{" "}
+      <MKTypography
+        component="a"
+        href="#"
+        target="_blank"
+        rel="noreferrer"
+        variant="button"
+        fontWeight="regular"
+        color="text.secondary"
+      >
+        Política de Privacidad
+      </MKTypography>{" "}
+      |{" "}
+      <MKTypography
+        component="a"
+        href="#"
+        target="_blank"
+        rel="noreferrer"
+        variant="button"
+        fontWeight="regular"
+        color="text.secondary"
+      >
+        Contáctanos
       </MKTypography>
-      .
     </MKTypography>
   ),
+  // socials: [
+  //   {
+  //     icon: <FacebookIcon />,
+  //     link: "https://www.facebook.com/CreativeTim/",
+  //   },
+  //   {
+  //     icon: <InstagramIcon />,
+  //     link: "https://instagram.com/creativetim",
+  //   },
+  // ],
 };

@@ -17,7 +17,6 @@ export default function usePlans() {
     useModalOptions(validOptions);
     useSelectedPlanName(planName);
   };
-  // Cerrar el modal
   const handleCloseModal = () => setOpenModal(false);
 
   useEffect(() => {

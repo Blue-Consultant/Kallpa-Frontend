@@ -8,6 +8,7 @@ import SignInBasic from "pages/LandingPages/SignIn/index";
 import routes from "routes";
 import PropTypes from "prop-types";
 import useAuth from "pages/LandingPages/SignIn/hooks/useAuth";
+import RegisterBasic from "pages/LandingPages/Register/index";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -54,6 +55,14 @@ export default function App() {
           element={
             <PrivateRoute isAuthenticated={!!localStorage.getItem("authToken")}>
               <Presentation />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <PrivateRoute isAuthenticated={!!localStorage.getItem("authToken")}>
+              <RegisterBasic />
             </PrivateRoute>
           }
         />

@@ -1,54 +1,165 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
+import { useState } from "react";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-
-// Material Kit 2 React components
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
-import MKSocialButton from "components/MKSocialButton";
-
-// Material Kit 2 React examples
+import MKButton from "components/MKButton";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import DefaultFooter from "examples/Footers/DefaultFooter";
-import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
-
-// Presentation page sections
-import Counters from "pages/Presentation/sections/Counters";
-import Information from "pages/Presentation/sections/Information";
-import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
-import Pages from "pages/Presentation/sections/Pages";
-import Testimonials from "pages/Presentation/sections/Testimonials";
-import Download from "pages/Presentation/sections/Download";
-
-// Presentation page components
-import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
-
-// Routes
 import routes from "routes";
 import footerRoutes from "footer.routes";
-
-// Images
-import bgImage from "assets/images/bg-presentation.jpg";
+import FeaturedAdCard from "./components/FeaturedAdCard";
+import Slider from "react-slick";
+import { Grid } from "@mui/material";
 
 function Presentation() {
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+
+  const toggleTheme = () => {
+    setIsDarkTheme((prev) => !prev);
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
+  const featuredAds = [
+    {
+      title: "Se alquila local",
+      price: "1,025",
+      location: "Lince",
+      category: "Inmobiliaria",
+      publishedDate: "15-03-25",
+      seller: {
+        name: "Juan Mendoza Rabanal",
+        memberSince: "2024",
+        rating: 4.5,
+      },
+      description: "Local de 140m2, con agua, luz, dos baños, cocina, piso blanco.",
+      rating: 4.5,
+    },
+    {
+      title: "Se necesita personal",
+      price: "1,449",
+      location: "Los Olivos",
+      category: "Trabajo",
+      publishedDate: "10-03-25",
+      seller: {
+        name: "Ana Gómez",
+        memberSince: "2023",
+        rating: 4.0,
+      },
+      description: "Se necesita personal para atención al cliente, turno mañana.",
+      rating: 4.0,
+    },
+    {
+      title: "TV Samsung 50'",
+      price: "1,025",
+      location: "Lince",
+      category: "Electrónica",
+      publishedDate: "12-03-25",
+      seller: {
+        name: "Carlos Pérez",
+        memberSince: "2022",
+        rating: 4.8,
+      },
+      description: "TV Samsung 50 pulgadas, 4K, en perfecto estado.",
+      rating: 4.8,
+    },
+    {
+      title: "Se necesita personal",
+      price: "1,449",
+      location: "Los Olivos",
+      category: "Trabajo",
+      publishedDate: "10-03-25",
+      seller: {
+        name: "Ana Gómez",
+        memberSince: "2023",
+        rating: 4.0,
+      },
+      description: "Se necesita personal para atención al cliente, turno mañana.",
+      rating: 4.0,
+    },
+    {
+      title: "TV Samsung 50'",
+      price: "1,025",
+      location: "Lince",
+      category: "Electrónica",
+      publishedDate: "12-03-25",
+      seller: {
+        name: "Carlos Pérez",
+        memberSince: "2022",
+        rating: 4.8,
+      },
+      description: "TV Samsung 50 pulgadas, 4K, en perfecto estado.",
+      rating: 4.8,
+    },
+    {
+      title: "Se necesita personal",
+      price: "1,449",
+      location: "Los Olivos",
+      category: "Trabajo",
+      publishedDate: "10-03-25",
+      seller: {
+        name: "Ana Gómez",
+        memberSince: "2023",
+        rating: 4.0,
+      },
+      description: "Se necesita personal para atención al cliente, turno mañana.",
+      rating: 4.0,
+    },
+  ];
+
+  const categories = [
+    "Trabajo",
+    "Ropa",
+    "Inmuebles",
+    "Hogar",
+    "Deportes",
+    "Servicios",
+    "Electrónica",
+    "Vehículos",
+    "Cosmética",
+    "Juguetes",
+    "Educación",
+    "Mascotas",
+  ];
+
   return (
-    <>
+    <MKBox
+      sx={{
+        backgroundColor: isDarkTheme ? "#1A1E2D" : "white",
+        minHeight: "100vh",
+      }}
+    >
       <DefaultNavbar
         routes={routes}
         action={{
@@ -58,166 +169,129 @@ function Presentation() {
           color: "info",
         }}
         sticky
+        toggleTheme={toggleTheme}
+        isDarkTheme={isDarkTheme}
       />
       <MKBox
-        minHeight="75vh"
+        minHeight="50vh"
         width="100%"
         sx={{
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "top",
           display: "grid",
           placeItems: "center",
+          pt: 12,
         }}
       >
         <Container>
-          <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
+          <Grid container item xs={12} lg={8} justifyContent="center" mx="auto" textAlign="center">
             <MKTypography
-              variant="h1"
-              color="white"
+              variant="h2"
+              color={isDarkTheme ? "white" : "text.primary"}
               mt={-6}
-              mb={1}
+              mb={2}
               sx={({ breakpoints, typography: { size } }) => ({
                 [breakpoints.down("md")]: {
                   fontSize: size["3xl"],
                 },
               })}
             >
-              Bienvenido a Kallpa{" "}
+              Encuentra lo que buscas en tu distrito
             </MKTypography>
-            {/* <MKTypography
-              variant="body1"
-              color="white"
-              textAlign="center"
-              px={{ xs: 6, lg: 12 }}
-              mt={1}
+            <MKTypography
+              variant="h5"
+              color={isDarkTheme ? "white" : "text.primary"}
+              mb={4}
+              sx={({ breakpoints, typography: { size } }) => ({
+                [breakpoints.down("md")]: {
+                  fontSize: size["xl"],
+                },
+              })}
             >
-              anuncios
-            </MKTypography> */}
+              La plataforma más segura para comprar y vender productos y servicios en tu zona
+            </MKTypography>
+            <MKButton color="info" size="large">
+              Publicar un anuncio
+            </MKButton>
           </Grid>
         </Container>
       </MKBox>
-      <Card
-        sx={{
-          p: 2,
-          mx: { xs: 2, lg: 3 },
-          mt: -8,
-          mb: 4,
-          backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
-          backdropFilter: "saturate(200%) blur(30px)",
-          boxShadow: ({ boxShadows: { xxl } }) => xxl,
-        }}
-      >
-        <Counters />
-        <Information />
-        <DesignBlocks />
-        <Pages />
-        <Container sx={{ mt: 6 }}>
-          <BuiltByDevelopers />
-        </Container>
-        <Container>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={4}>
-              <FilledInfoCard
-                variant="gradient"
-                color="info"
-                icon="flag"
-                title="Getting Started"
-                description="Check the possible ways of working with our product and the necessary files for building your own project."
-                action={{
-                  type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/overview/material-kit/",
-                  label: "Let's start",
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} lg={4}>
-              <FilledInfoCard
-                color="info"
-                icon="precision_manufacturing"
-                title="Plugins"
-                description="Get inspiration and have an overview about the plugins that we used to create the Material Kit."
-                action={{
-                  type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/overview/datepicker/",
-                  label: "Read more",
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} lg={4}>
-              <FilledInfoCard
-                color="info"
-                icon="apps"
-                title="Components"
-                description="Material Kit is giving you a lot of pre-made components, that will help you to build UI's faster."
-                action={{
-                  type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/alerts/material-kit/",
-                  label: "Read more",
-                }}
-              />
-            </Grid>
-          </Grid>
-        </Container>
-        <Testimonials />
-        <Download />
-        <MKBox pt={18} pb={6}>
-          <Container>
-            <Grid container spacing={3}>
-              <Grid item xs={12} lg={5} ml="auto" sx={{ textAlign: { xs: "center", lg: "left" } }}>
-                <MKTypography variant="h4" fontWeight="bold" mb={0.5}>
-                  Thank you for your support!
-                </MKTypography>
-                <MKTypography variant="body1" color="text">
-                  We deliver the best web products
-                </MKTypography>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                lg={5}
-                my={{ xs: 5, lg: "auto" }}
-                mr={{ xs: 0, lg: "auto" }}
-                sx={{ textAlign: { xs: "center", lg: "right" } }}
-              >
-                <MKSocialButton
-                  component="a"
-                  href="https://twitter.com/intent/tweet?text=Check%20Material%20Design%20System%20made%20by%20%40CreativeTim%20%23webdesign%20%23designsystem%20%23mui5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fmaterial-kit-react"
-                  target="_blank"
-                  color="twitter"
-                  sx={{ mr: 1 }}
-                >
-                  <i className="fab fa-twitter" />
-                  &nbsp;Tweet
-                </MKSocialButton>
-                <MKSocialButton
-                  component="a"
-                  href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-kit-react"
-                  target="_blank"
-                  color="facebook"
-                  sx={{ mr: 1 }}
-                >
-                  <i className="fab fa-facebook" />
-                  &nbsp;Share
-                </MKSocialButton>
-                <MKSocialButton
-                  component="a"
-                  href="https://www.pinterest.com/pin/create/button/?url=https://www.creative-tim.com/product/material-kit-react"
-                  target="_blank"
-                  color="pinterest"
-                >
-                  <i className="fab fa-pinterest" />
-                  &nbsp;Pin it
-                </MKSocialButton>
-              </Grid>
-            </Grid>
-          </Container>
+
+      <Container sx={{ py: 4 }}>
+        <MKTypography
+          variant="h4"
+          color={isDarkTheme ? "white" : "text.primary"}
+          mb={4}
+          sx={{ textAlign: "center", display: "flex", justifyContent: "center" }}
+        >
+          Anuncios destacados
+        </MKTypography>
+        <MKBox
+          sx={{
+            "& .slick-slide > div": {
+              margin: "0 10px",
+            },
+            "& .slick-list": {
+              margin: "0 -10px",
+            },
+          }}
+        >
+          <Slider {...settings}>
+            {featuredAds.map((ad, index) => (
+              <div key={index} style={{ padding: "0 15px" }}>
+                <FeaturedAdCard
+                  title={ad.title}
+                  price={ad.price}
+                  location={ad.location}
+                  category={ad.category}
+                  publishedDate={ad.publishedDate}
+                  seller={ad.seller}
+                  description={ad.description}
+                  rating={ad.rating}
+                />
+              </div>
+            ))}
+          </Slider>
         </MKBox>
-      </Card>
-      <MKBox pt={6} px={1} mt={6}>
-        <DefaultFooter content={footerRoutes} />
+      </Container>
+
+      {/* Popular Categories Section */}
+      <Container sx={{ py: 4 }}>
+        <MKTypography
+          variant="h4"
+          color={isDarkTheme ? "white" : "text.primary"}
+          mb={4}
+          sx={{ textAlign: "center", display: "flex", justifyContent: "center" }}
+        >
+          Categorías populares
+        </MKTypography>
+        <Grid container spacing={2} justifyContent="center">
+          {categories.map((category, index) => (
+            <Grid item xs={6} sm={4} md={2} key={index}>
+              <MKButton
+                variant="contained"
+                color="primary"
+                fullWidth
+                sx={{
+                  backgroundColor: "#3f51b5",
+                  color: "white",
+                  textTransform: "none",
+                  fontSize: "1rem",
+                  padding: "10px",
+                  "&:hover": {
+                    backgroundColor: "#303f9f",
+                  },
+                }}
+              >
+                {category}
+              </MKButton>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+
+      <MKBox pt={3} px={1} mt={3}>
+        <DefaultFooter content={footerRoutes} isDarkTheme={isDarkTheme} />
       </MKBox>
-    </>
+    </MKBox>
   );
 }
 

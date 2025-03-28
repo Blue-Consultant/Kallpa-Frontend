@@ -1,0 +1,20 @@
+/* src/components/InputStyles.module.css */
+.purpleInput :global(.MuiInputBase-input) {
+  color: #4b38e0;
+}
+
+.purpleInput :global(.MuiInputLabel-root) {
+  color: #4b38e0;
+}
+
+.purpleInput :global(.MuiOutlinedInput-root) :global(fieldset) {
+  border-color: #4b38e0;
+}
+
+.purpleInput :global(.MuiOutlinedInput-root):hover :global(fieldset) {
+  border-color: #4b38e0;
+}
+
+.purpleInput :global(.MuiOutlinedInput-root.Mui-focused) :global(fieldset) {
+  border-color: #4b38e0;
+}
